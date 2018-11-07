@@ -1,5 +1,7 @@
 package com.example.hp.motivationalquotes.data;
 
+import android.util.Log;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -15,41 +17,42 @@ import java.util.ArrayList;
 
 public class QuoteData {
 
-    ArrayList<Quote> quoteArrayList = new ArrayList<Quote>();
+        ArrayList<Quote> quoteArrayList = new ArrayList<>();
 
-    public void getQuotes(){
-        String url = "https://gist.github.com/b1nary/ea8fff806095bcedacce";
+        public void getQuotes() {
+            String url = "https://raw.githubusercontent.com/pdichone/UIUX-Android-Course/master/Quotes.json%20";
 
-        // creation of JSOn array request
+            JsonArrayRequest jsonArrayRequest =
+                    new JsonArrayRequest(Request.Method.GET,
+                            url, new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            for (int i = 0; i < response.length(); i++) {
+                                try {
+                                    JSONObject quoteObject = response.getJSONObject(i);
+                                    Quote quote = new Quote();
+                                    quote.setQuote(quoteObject.getString("quote"));
+                                    quote.setFrom(quoteObject.getString("from"));
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
+                                    Log.d("STUFFF::", quoteObject.getString("from"));
 
-                for(int i = 0; i < response.length(); i++){
-                    try {
-                        JSONObject quoteObject = response.getJSONObject(i);
-                        Quote qoute = new Quote();
-                        qoute.setText(quoteObject.getString("text"));
-                        qoute.setFrom(quoteObject.getString("from"));
+                                    quoteArrayList.add(quote);
 
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+                        }
+                    });
 
-            }
-        });
+            AppController.getInstance().addToRequestQueue(jsonArrayRequest);
 
-
-        AppController.getInstance().addToRequestQueue(jsonArrayRequest);
-
+        }
     }
 
-}
