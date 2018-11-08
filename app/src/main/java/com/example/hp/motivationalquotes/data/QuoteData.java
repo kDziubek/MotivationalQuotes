@@ -6,6 +6,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.hp.motivationalquotes.QuoteListAsycnRespone;
 import com.example.hp.motivationalquotes.controller.AppController;
 import com.example.hp.motivationalquotes.model.Quote;
 
@@ -19,7 +20,9 @@ public class QuoteData {
 
         private  ArrayList<Quote> quoteArrayList = new ArrayList<>();
 
-        public void getQuotes() {
+
+
+    public void getQuotes(final QuoteListAsycnRespone callBack) {
             String url = "https://raw.githubusercontent.com/pdichone/UIUX-Android-Course/master/Quotes.json%20";
 
 
@@ -47,6 +50,10 @@ public class QuoteData {
                                     e.printStackTrace();
                                 }
 
+                            }
+                            if (null!=callBack){
+                                //only when method getQuotes is finished it will run
+                                callBack.processFinished(quoteArrayList);
                             }
                         }
                     }, new Response.ErrorListener() {
