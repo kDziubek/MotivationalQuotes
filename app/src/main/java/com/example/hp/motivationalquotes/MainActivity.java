@@ -21,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // quoteViewPagerAdapter connected to viewPager adapter.
+        // getSupportFragmentManager method from fragment activity(default class)
+        // get fragment created bellow
+        // new object from QuoteFragment class created and newInstance method called
         quoteViewPagerAdapter = new QuoteViewPagerAdapter(getSupportFragmentManager(),getFragment());
 
         viewPager = findViewById(R.id.viepager);
