@@ -22,8 +22,7 @@ public class QuoteData {
         public void getQuotes() {
             String url = "https://raw.githubusercontent.com/pdichone/UIUX-Android-Course/master/Quotes.json%20";
 
-            JsonArrayRequest jsonArrayRequest =
-                    new JsonArrayRequest(Request.Method.GET,
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
                             url, new Response.Listener<JSONArray>() {
                         @Override
                         public void onResponse(JSONArray response) {
