@@ -42,7 +42,9 @@ public class QuoteFragment extends Fragment {
         return quoteView;
     }
 
-    public static final QuoteFragment newInstance(String quote, String author){
+    //method to create fragment
+
+   public static final QuoteFragment newInstance(String quote, String author){
 
         QuoteFragment fragment  = new QuoteFragment();
         Bundle bundle = new Bundle();
@@ -52,4 +54,5 @@ public class QuoteFragment extends Fragment {
 
         return fragment;
     }
+
 }
