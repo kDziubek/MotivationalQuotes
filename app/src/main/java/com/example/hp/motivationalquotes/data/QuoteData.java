@@ -40,9 +40,9 @@ public class QuoteData {
                                     //initialize new object --quote-- of Quote(Own model class) class
                                     Quote quote = new Quote();
                                     quote.setQuote(quoteObject.getString("quote"));
-                                    quote.setFrom(quoteObject.getString("from"));
+                                    quote.setAuthor(quoteObject.getString("name"));
 
-                                    Log.d("STUFFF::", quoteObject.getString("from"));
+                                    Log.d("STUFFF::", quoteObject.getString("name"));
 
                                     quoteArrayList.add(quote);
 

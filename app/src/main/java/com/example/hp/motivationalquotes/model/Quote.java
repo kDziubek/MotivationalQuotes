@@ -3,7 +3,7 @@ package com.example.hp.motivationalquotes.model;
 public class Quote {
 
     private String quote;
-    private String from;
+    private String author;
 
     public String getQuote() {
         return quote;
@@ -13,11 +13,11 @@ public class Quote {
         this.quote = quote;
     }
 
-    public String getFrom() {
-        return from;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setAuthor(String from) {
+        this.author = from;
     }
 }

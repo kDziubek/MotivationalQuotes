@@ -27,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
         // getSupportFragmentManager method from fragment activity(default class)
         // get fragment created bellow
         // new object from QuoteFragment class created and newInstance method called
-        quoteViewPagerAdapter = new QuoteViewPagerAdapter(getSupportFragmentManager(),getFragment());
+
+
+        setContentView(R.layout.activity_main);
+        quoteViewPagerAdapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), getFragments());
 
         viewPager = findViewById(R.id.viepager);
         viewPager.setAdapter(quoteViewPagerAdapter);
@@ -35,19 +38,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private List<Fragment>getFragment(){
+
+    private List<Fragment> getFragments() {
         final List<Fragment> fragmentList = new ArrayList<>();
         new QuoteData().getQuotes(new QuoteListAsycnRespone() {
             @Override
             public void processFinished(ArrayList<Quote> quotes) {
-                for (int i = 0 ; i<quotes.size(); i++) {
-                    QuoteFragment quoteFragment = QuoteFragment.newInstance(quotes.get(i).getFrom(), quotes.get(i).getQuote());
+                for (int i = 0; i < quotes.size(); i++) {
+                    QuoteFragment quoteFragment = QuoteFragment.newInstance(
+                            quotes.get(i).getQuote(),
+                            quotes.get(i).getAuthor()
+                    );
                     fragmentList.add(quoteFragment);
                 }
-                //very important.
-                quoteViewPagerAdapter.notifyDataSetChanged();
+                quoteViewPagerAdapter.notifyDataSetChanged();/// very important!!
+
             }
         });
+
+
+
+
         return fragmentList;
     }
 }
