@@ -9,8 +9,13 @@ import com.example.hp.motivationalquotes.data.QuoteData;
 import com.example.hp.motivationalquotes.data.QuoteViewPagerAdapter;
 import com.example.hp.motivationalquotes.model.Quote;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,8 +33,6 @@ public class MainActivity extends AppCompatActivity {
         // get fragment created bellow
         // new object from QuoteFragment class created and newInstance method called
 
-
-        setContentView(R.layout.activity_main);
         quoteViewPagerAdapter = new QuoteViewPagerAdapter(getSupportFragmentManager(), getFragments());
 
         viewPager = findViewById(R.id.viepager);
@@ -50,16 +53,25 @@ public class MainActivity extends AppCompatActivity {
                             quotes.get(i).getAuthor()
                     );
                     fragmentList.add(quoteFragment);
+
                 }
                 quoteViewPagerAdapter.notifyDataSetChanged();/// very important!!
 
             }
         });
 
-
-
-
         return fragmentList;
     }
+
+
+
+
+//        Random rand = new Random();
+//            int randomIndex = rand.nextInt(list.size());
+//            return randomIndex;
+
+
+
+
 }
 
